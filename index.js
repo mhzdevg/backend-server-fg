@@ -1,13 +1,26 @@
-const connectToMongo = require("./db");
 const express = require("express");
+const mongoose = require("mongoose");
 var cors = require("cors");
 
-connectToMongo();
 const app = express();
-const port = 5000;
+const PORT = process.env.PORT || 3000;
 
-app.use(cors());
-app.use(express.json());
+mongoose.set("strictQuery", false);
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+};
+
+// app.use(cors());
+// app.use(express.json());
 
 // Available Routes
 app.use("/api/auth", require("./routes/auth"));
@@ -17,6 +30,9 @@ app.use("/api/messages", require("./routes/messages"));
 app.use("/api/users", require("./routes/users"));
 app.use("/api/bookmarks", require("./routes/bookmarks"));
 
-app.listen(port, () => {
-  console.log(`Flame Grill API listening at http://localhost:${port}`);
+//Connect to the database before listening
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log("listening for requests");
+  });
 });
