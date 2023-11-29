@@ -3,6 +3,7 @@ const router = express.Router();
 const fetchUser = require("../middleware/fetchUser");
 const Order = require("../models/Order");
 const { body, validationResult } = require("express-validator");
+const bodyParser = require("body-parser");
 
 //Route 1: Get all the orders of a user using GET "/api/orders/getUserOrders"
 router.get("/getUserOrders", fetchUser, async (req, res) => {
@@ -19,6 +20,7 @@ router.get("/getUserOrders", fetchUser, async (req, res) => {
 router.post(
   "/placeOrder",
   fetchUser,
+  bodyParser.json(),
   [
     body("cartItems").isLength({ min: 1 }),
     body("addressId").trim().isLength({ min: 1 }),
