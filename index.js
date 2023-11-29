@@ -12,7 +12,7 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log(`MongoDB Connected, Your Express API is now listening`);
+    console.log(`MongoDB Connected, Your Flame Grill API is now listening`);
   } catch (error) {
     console.log(error);
     process.exit(1);
@@ -33,6 +33,6 @@ app.use("/api/bookmarks", require("./routes/bookmarks"));
 //Connect to the database before listening
 connectDB().then(() => {
   app.listen(PORT, () => {
-    console.log("listening for requests");
+    console.log("Listening for requests");
   });
 });
