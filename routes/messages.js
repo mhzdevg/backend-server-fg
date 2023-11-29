@@ -3,11 +3,13 @@ const router = express.Router();
 const fetchUser = require("../middleware/fetchUser");
 const Message = require("../models/Message");
 const { body, validationResult } = require("express-validator");
+const bodyParser = require("body-parser");
 
 //Route 1: Send the message using POST "/api/messages/sendMessage"
 router.post(
   "/sendMessage",
   fetchUser,
+  bodyParser.json(),
   [
     body("name", "Enter a Valid Title").trim().isLength({ min: 1 }),
     body("phone", "Enter a valid phone number").isLength({ min: 9 }),
