@@ -3,6 +3,7 @@ const router = express.Router();
 const fetchUser = require("../middleware/fetchUser");
 const Bookmark = require("../models/Bookmark");
 const { body, validationResult } = require("express-validator");
+const bodyParser = require("body-parser");
 
 //Route 1: Get all the bookmarks using GET "/api/bookmarks/getBookmarks"
 router.get("/getBookmarks", fetchUser, async (req, res) => {
@@ -21,9 +22,8 @@ router.get("/getBookmarks", fetchUser, async (req, res) => {
 });
 
 //Route 2: Update the bookmarks array using PATCH "/api/bookmarks/updateBookmarks"
-router.patch("/updateBookmarks", fetchUser, async (req, res) => {
+router.patch("/updateBookmarks", fetchUser, bodyParser.json(), async (req, res) => {
     const { sku } = req.body;
-  
     try {
       // Find the bookmarks for the current user
       let bookmarks = await Bookmark.findOne({ user: req.user.id });
