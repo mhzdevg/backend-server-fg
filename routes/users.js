@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const fetchUser = require("../middleware/fetchUser");
 const User = require("../models/User");
+const bodyParser = require("body-parser");
 
 // GET user details by ID
 router.get("/getUser", fetchUser, async (req, res) => {
@@ -15,7 +16,7 @@ router.get("/getUser", fetchUser, async (req, res) => {
 });
 
 // UPDATE user details by ID
-router.put("/updateUser", fetchUser, async (req, res) => {
+router.put("/updateUser", fetchUser, bodyParser.json(), async (req, res) => {
   const { name, phone, email } = req.body;
 
   try {
