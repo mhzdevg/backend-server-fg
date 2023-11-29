@@ -12,7 +12,7 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log(`MongoDB Connected, Your Flame Grill API is now listening`);
+    console.log(`MongoDB Connected, Flame Grill API is now listening`);
   } catch (error) {
     console.log(error);
     process.exit(1);
