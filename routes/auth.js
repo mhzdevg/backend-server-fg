@@ -65,6 +65,7 @@ router.post(
 // Authenticate a user
 router.post(
   "/login",
+  bodyParser.json(),
   [
     body("email", "Enter a Valid Email").isEmail(),
     body("password", "Password can not be blank").exists(),
@@ -109,7 +110,7 @@ router.post(
 //get user data
 router.post("/getUser", fetchUser, async (req, res) => {
   try {
-    userId = req.user.id;
+    const userId = req.user.id;
     const user = await User.findById(userId).select("-password");
     res.send(user);
   } catch (error) {
