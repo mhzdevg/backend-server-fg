@@ -3,6 +3,7 @@ const router = express.Router();
 const fetchUser = require("../middleware/fetchUser");
 const Address = require("../models/Address");
 const { body, validationResult } = require("express-validator");
+const bodyParser = require("body-parser");
 
 //Route 1: Get All the Addresses using GET "/api/auth/fetchAllAddresses"
 router.get("/fetchAllAddresses", fetchUser, async (req, res) => {
@@ -19,6 +20,7 @@ router.get("/fetchAllAddresses", fetchUser, async (req, res) => {
 router.post(
   "/addAddress",
   fetchUser,
+  bodyParser.json(),
   [
     body("id"),
     body("name", "Enter a Valid Title").trim().isLength({ min: 1 }),
