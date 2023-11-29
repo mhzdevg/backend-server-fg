@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 require('dotenv').config();
 var jwt = require("jsonwebtoken");
 let fetchUser = require("../middleware/fetchUser");
+const bodyParser = require("body-parser");
 let JWT_SECRET = process.env.JWT_SECRET;
 
 // Create a User using: POST "/api/auth/"
@@ -21,6 +22,7 @@ router.post(
       min: 8,
     }),
   ],
+  bodyParser.json(),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
