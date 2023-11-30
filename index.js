@@ -5,8 +5,6 @@ var cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors(corsOptions));
-
 mongoose.set("strictQuery", false);
 const connectDB = async () => {
   try {
@@ -34,6 +32,8 @@ const corsOptions = {
     }
   },
 };
+
+app.use(cors(corsOptions));
 
 // Available Routes
 app.use("/api/auth", require("./routes/auth"));
