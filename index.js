@@ -5,6 +5,18 @@ var cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Allow requests from the frontend domain
+const allowedOrigins = ['https://yourfrontenddomain.com', 'http://localhost:3000']; // Add more origins as needed
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
 mongoose.set("strictQuery", false);
 const connectDB = async () => {
   try {
