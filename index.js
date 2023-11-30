@@ -5,17 +5,7 @@ var cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Allow requests from the frontend domain
-const allowedOrigins = ['https://yourfrontenddomain.com', 'http://localhost:3000']; // Add more origins as needed
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
+app.use(cors(corsOptions));
 
 mongoose.set("strictQuery", false);
 const connectDB = async () => {
@@ -33,6 +23,17 @@ const connectDB = async () => {
 
 // app.use(cors());
 // app.use(express.json());
+// Allow requests from the frontend domain
+const allowedOrigins = ['https://flame-grill-by-hamza.netlify.app', 'http://localhost:3000']; // Add more origins as needed
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 
 // Available Routes
 app.use("/api/auth", require("./routes/auth"));
