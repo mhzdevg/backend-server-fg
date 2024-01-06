@@ -42,6 +42,7 @@ app.use("/api/orders", require("./routes/orders"));
 app.use("/api/messages", require("./routes/messages"));
 app.use("/api/users", require("./routes/users"));
 app.use("/api/bookmarks", require("./routes/bookmarks"));
+app.use("/api/subscriptionEmails", require("./routes/subscriptionEmails"));
 
 //Connect to the database before listening
 connectDB().then(() => {
