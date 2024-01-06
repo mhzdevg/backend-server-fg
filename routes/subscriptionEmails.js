@@ -25,7 +25,7 @@ router.post(
 
       if (existingEmail) {
         // If email exists, send a response that the user is already in the waitlist
-        return res.status(400).json({ msg: "You're already in the Waitlist" });
+        return res.status(200).json({ msg: "You're already in the Waitlist" });
       }
 
       // If the email doesn't exist, save it to the WaiterEmail model
