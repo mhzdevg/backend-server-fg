@@ -22,7 +22,7 @@ const connectDB = async () => {
 // app.use(cors());
 // app.use(express.json());
 // Allow requests from the frontend domain
-const allowedOrigins = ['https://flame-grill-by-hamza.netlify.app', 'https://stream-vibe-s.netlify.app', 'http://localhost:3000']; // Add more origins as needed
+const allowedOrigins = ['https://flame-grill.netlify.app', 'https://stream-vibe-s.netlify.app', 'http://localhost:3000']; // Add more origins as needed
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
